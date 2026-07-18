@@ -211,6 +211,35 @@
             <button class="bg-primary text-on-primary-container px-6 py-2 rounded-full font-label-mono-lg text-label-mono-lg hover:brightness-110 active:scale-95 transition-all duration-300 purple-glow cursor-pointer">
                 Hire Me
             </button>
+            <!-- Radio Station Widget -->
+            <div class="relative ml-2">
+                <!-- Toggle Button -->
+                <button id="radio-toggle" class="w-10 h-10 border border-border-subtle flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all duration-300 cursor-pointer bg-transparent">
+                    <span class="material-symbols-outlined text-[20px]">radio</span>
+                </button>
+                
+                <!-- Glassmorphic Dropdown Player (Hidden by default) -->
+                <div id="spotify-widget" class="absolute right-0 top-14 w-80 opacity-0 invisible transition-all duration-300 transform origin-top-right scale-95 z-50 pointer-events-none">
+                    <div class="p-4 border border-border-subtle bg-surface-container-high/90 backdrop-blur-xl shadow-2xl">
+                        
+                        <!-- Live Indicator -->
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                            </span>
+                            <span class="font-label-mono-sm text-primary uppercase tracking-[0.2em] opacity-80">STATION_LIVE</span>
+                        </div>
+                        
+                        <!-- Spotify Embed -->
+                        <iframe style="border-radius:0px" src="https://open.spotify.com/embed/track/4LRPiXqCikLlN15c3yImP7?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        
+                    </div>
+                </div>
+            </div>
+        <div class="md:hidden">
+            <span class="material-symbols-outlined text-primary">menu</span>
+        </div>
         </div>
     </nav>
 
@@ -664,6 +693,28 @@
             }
         });
 
+        // --- Radio Station Toggle Logic ---
+        const radioToggle = document.getElementById('radio-toggle');
+        const spotifyWidget = document.getElementById('spotify-widget');
+
+        radioToggle.addEventListener('click', () => {
+            // Check if the widget is currently hidden
+            if (spotifyWidget.classList.contains('opacity-0')) {
+                // Open the widget
+                spotifyWidget.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+                spotifyWidget.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+                radioToggle.classList.add('text-primary', 'border-primary');
+            } else {
+                // Close the widget (music will keep playing!)
+                spotifyWidget.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+                spotifyWidget.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+                radioToggle.classList.remove('text-primary', 'border-primary');
+            }
+        });
+
+        // Re-apply cursor hover effects for the new toggle button
+        applyCursorHoverEffects();
+
         const contactForm = document.getElementById('contact-form');
         const formSuccess = document.getElementById('form-success');
         const submitBtn = document.getElementById('submit-button');
@@ -728,6 +779,8 @@
                 submitBtn.classList.remove('opacity-50', 'pointer-events-none');
             });
         }
+
+
     </script>
 </body>
 </html>
