@@ -23,7 +23,7 @@ I'm a big believer in exploring different creative and physical outlets when I s
 
 ### 📫 Let's Connect!
 * **Email:** [info.cometlabs@gmail.com](mailto:info.cometlabs@gmail.com)
-* **Portfolio:** [justbeingayush](https://justbeingayush.github.io/justbeingayush) *(Building in progress!)* and [ayuvibee](ayuvibee.vercel.app)
+* **Portfolio:** [itsjustayush](https://itsjustayush.github.io/itsjustayush) *(Building in progress!)* and [ayuvibee](ayuvibee.vercel.app)
 
 
 ---
