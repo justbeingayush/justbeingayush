@@ -1,5 +1,5 @@
 ---
-name: Architectural Prestige
+name: Oblivion 
 colors:
   surface: '#131315'
   surface-dim: '#131315'
@@ -13,44 +13,44 @@ colors:
   on-surface-variant: '#d0c5b5'
   inverse-surface: '#e5e1e4'
   inverse-on-surface: '#313032'
-  outline: '#998f81'
+  outline: '#937e9a'
   outline-variant: '#4d463a'
-  surface-tint: '#e3c285'
-  primary: '#e5c487'
-  on-primary: '#402d00'
-  primary-container: '#c8a96e'
-  on-primary-container: '#533d0c'
-  inverse-primary: '#735b28'
+  surface-tint: '#b78ad5'
+  primary: '#b58ad7'
+  on-primary: '#2d1639'
+  primary-container: '#d7c0eb'
+  on-primary-container: '#3f2852'
+  inverse-primary: '#76508f'
   secondary: '#c6c6c7'
   on-secondary: '#2f3131'
   secondary-container: '#454747'
   on-secondary-container: '#b4b5b5'
-  tertiary: '#bac7f2'
-  on-tertiary: '#222f51'
-  tertiary-container: '#9facd5'
-  on-tertiary-container: '#334063'
+  tertiary: '#cbb7e9'
+  on-tertiary: '#312448'
+  tertiary-container: '#b8a2d8'
+  on-tertiary-container: '#4a3a62'
   error: '#ffb4ab'
   on-error: '#690005'
   error-container: '#93000a'
   on-error-container: '#ffdad6'
-  primary-fixed: '#ffdea3'
-  primary-fixed-dim: '#e3c285'
-  on-primary-fixed: '#261900'
-  on-primary-fixed-variant: '#594312'
+  primary-fixed: '#f0dcff'
+  primary-fixed-dim: '#d1b1e8'
+  on-primary-fixed: '#220f2c'
+  on-primary-fixed-variant: '#5b3d6f'
   secondary-fixed: '#e2e2e2'
   secondary-fixed-dim: '#c6c6c7'
   on-secondary-fixed: '#1a1c1c'
   on-secondary-fixed-variant: '#454747'
   tertiary-fixed: '#dae2ff'
-  tertiary-fixed-dim: '#b8c5f0'
-  on-tertiary-fixed: '#0b1a3b'
-  on-tertiary-fixed-variant: '#394669'
+  tertiary-fixed-dim: '#c6b1e8'
+  on-tertiary-fixed: '#1a1030'
+  on-tertiary-fixed-variant: '#4a3a62'
   background: '#131315'
   on-background: '#e5e1e4'
   surface-variant: '#353437'
   surface-muted: '#1A1A1D'
   border-subtle: '#27272A'
-  gold-dimmed: '#8B734B'
+  gold-dimmed: '#7f5f93'
 typography:
   display-lg:
     fontFamily: Literata
@@ -107,14 +107,14 @@ spacing:
 
 This design system is built upon an aesthetic of **Architectural Minimalism** and **Technical Sophistication**. It targets a high-end professional audience, evoking an emotional response of authority, precision, and timeless elegance. 
 
-The design narrative focuses on the juxtaposition of "The Archive" and "The Future." It utilizes a deep, immersive black canvas to create high-contrast focal points using gold accents and razor-sharp typography. The visual style leans heavily into **Brutalism-lite**—incorporating structured grids and thin hairlines—softened by luxurious serif typography and intentional negative space. Every element should feel intentional, deliberate, and engineered rather than merely decorated.
+The design narrative focuses on the juxtaposition of "The Archive" and "The Future." It utilizes a deep, immersive black canvas to create high-contrast focal points using vibrant purple accents and razor-sharp typography. The visual style leans heavily into **Brutalism-lite**—incorporating structured grids and thin hairlines—softened by luxurious serif typography and intentional negative space. Every element should feel intentional, deliberate, and engineered rather than merely decorated.
 
 ## Colors
 
 The palette is strictly limited to maintain a high-prestige, editorial feel. 
 
-- **Primary (Gold/Tan):** Used exclusively for high-priority calls to action, active states, and critical highlights. It represents the "value" within the dark void.
-- **Secondary (White):** Reserved for primary content and high-readability text.
+- **Primary (Purple/Amethyst):** Used exclusively for high-priority calls to action, active states, and critical highlights. It represents the "value" within the dark void.
+- **Secondary (White/Light Gray):** Reserved for primary content and high-readability text.
 - **Neutral (Deep Black):** The foundation of the system. It should be applied to backgrounds to create a sense of infinite depth.
 - **Surface & Borders:** For secondary containers or structural lines, use dark grays that remain close to the black base to prevent the grid from becoming visually noisy.
 
@@ -140,35 +140,35 @@ The layout is a **structured architectural grid**. It relies on 1px borders to d
 
 In this dark-mode centric system, depth is achieved through **Tonal Layering** and **Outline Definition** rather than traditional shadows.
 
-1.  **Base Layer:** The deepest black (#09090B).
-2.  **Elevated Surface:** A slightly lighter gray (#1A1A1D) used for cards or drawers that sit "on top" of the base.
-3.  **Interaction Depth:** Instead of shadows, use 1px borders in Gold (#C8A96E) to indicate focus or active states.
+1.  **Base Layer:** The deepest black (#0E0E10).
+2.  **Elevated Surface:** A slightly lighter gray (#1C1B1D or #201F22) used for cards or drawers that sit "on top" of the base.
+3.  **Interaction Depth:** Instead of shadows, use 1px borders in Purple (#B58AD7) to indicate focus or active states.
 4.  **Glassmorphism:** For overlays (like navigation bars), use a backdrop-blur (20px) with a 60% opacity version of the neutral black to maintain context of the content underneath.
 
 ## Shapes
 
 The shape language is strictly **Sharp (0px)**. 
 
-To maintain the architectural and technical tone, avoid rounded corners on any UI elements, including buttons, input fields, and containers. This creates a "blueprint" feel where every line is a vector and every corner is an intersection. The only exception is for circular avatars or icon-specific geometry. All primary containers and action elements must maintain 90-degree angles.
+To maintain the architectural and technical tone, avoid rounded corners on any UI elements, including buttons, input fields, and containers. This creates a "blueprint" feel where every line is a vector and every corner is an intersection. The only exception is for circular avatars or cursor geometry. All primary containers and action elements must maintain 90-degree angles.
 
 ## Components
 
 - **Buttons:**
-    - **Primary:** Solid Gold (#C8A96E) fill with Black text. No border. Sharp corners.
-    - **Secondary:** Transparent fill with White 1px border. Sharp corners.
+    - **Primary:** Solid Purple/Primary Container (#D7C0EB) fill with Dark text. No border. Sharp corners.
+    - **Secondary:** Transparent fill with White/Subtle 1px border. Sharp corners.
     - **Ghost:** Text-only, using the Monospace font style, with a subtle underline appearing on hover.
 - **Input Fields:**
     - 1px White or Light Gray border, sharp corners, transparent background. 
     - Floating labels using the Monospace label-mono-sm style. 
-    - Active state: Border changes to Gold (#C8A96E).
+    - Active state: Border changes to Purple (#B58AD7).
 - **Navigation:**
     - Clean, text-based links using the Monospace font. 
-    - Active links should have a simple Gold dot or 1px underline.
+    - Active links should have a simple Purple dot or 1px underline.
 - **Cards:**
     - Defined by 1px borders (#27272A) rather than background colors. 
     - Titles within cards should always use the Serif font, while metadata uses the Monospace font.
 - **Chips/Tags:**
     - Rectangular, sharp corners, small Monospace text. 
-    - High contrast: White text on a dark gray background or Black text on a Gold background for "featured" tags.
+    - High contrast: White text on a dark gray background or Black text on a Purple background for "featured" tags.
 - **Dividers:**
     - 1px solid lines using `#27272A`. Horizontal and vertical dividers should be used liberally to reinforce the grid system.
