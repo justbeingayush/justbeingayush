@@ -119,6 +119,7 @@
             pointer-events: none;
         }
 
+        /* Combined Glassmorphism + Original Theme styling */
         .glass-card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(16px);
@@ -129,7 +130,7 @@
         
         .glass-card:hover {
             background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(181, 138, 215, 0.25);
+            border-color: rgba(181, 138, 215, 0.25); /* Purple theme border glow */
             transform: translateY(-4px);
         }
 
@@ -145,6 +146,7 @@
             background: radial-gradient(circle at 50% 50%, #1a1a1d 0%, #131315 100%);
         }
 
+        /* Custom Cursor */
         .custom-cursor {
             width: 12px;
             height: 12px;
@@ -173,6 +175,7 @@
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
 
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -186,12 +189,63 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #b58ad7;
         }
+
+        .visualizer-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 24px;
+        }
+        .visualizer-bar {
+            width: 4px;
+            background-color: #b58ad7;
+            border-radius: 2px;
+            transform-origin: bottom;
+            transition: height 0.1s ease;
+            height: 4px; 
+        }
+        .visualizer-bar.active {
+            animation: bounce 1s infinite ease-in-out alternate;
+        }
+        .visualizer-bar.active:nth-child(1) { animation-delay: 0.1s; }
+        .visualizer-bar.active:nth-child(2) { animation-delay: 0.4s; }
+        .visualizer-bar.active:nth-child(3) { animation-delay: 0.2s; }
+        .visualizer-bar.active:nth-child(4) { animation-delay: 0.5s; }
+        .visualizer-bar.active:nth-child(5) { animation-delay: 0.3s; }
+
+        @keyframes bounce {
+            0% { height: 4px; }
+            100% { height: 24px; }
+        }
+
+        input[type=range].volume-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            height: 4px;
+            border-radius: 2px;
+            outline: none;
+        }
+        input[type=range].volume-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+        input[type=range].volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background: #b58ad7;
+            margin-top: -4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body class="bg-background text-on-surface obsidian-gradient selection:bg-primary-container selection:text-on-primary-container min-h-screen">
 
-    <!-- Elements -->
     <div class="custom-cursor" id="cursor"></div>
     <div class="custom-cursor-follower" id="cursor-follower"></div>
     <div class="fixed inset-0 grid-overlay z-0"></div>
@@ -214,39 +268,76 @@
                 <!-- Action Buttons (Hire Me & Radio) -->
                 <div class="flex items-center gap-4 pl-8 border-l border-white/10">
                     <button class="bg-primary text-on-primary-container px-6 py-2 rounded-full font-label-mono-lg text-label-mono-lg hover:brightness-110 active:scale-95 transition-all duration-300 purple-glow cursor-pointer">
-                        Hire Me
-                    </button>
-                    
-                    <!-- Radio Station Widget -->
-                    <div class="relative">
-                        <!-- Toggle Button -->
-                        <button id="radio-toggle" class="w-10 h-10 border border-border-subtle rounded-lg flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all duration-300 cursor-pointer bg-transparent">
-                            <span class="material-symbols-outlined text-[20px]">radio</span>
-                        </button>
+                Hire Me
+            </button>
+            <!-- Radio Station Widget -->
+            <div class="relative ml-2">
+                <!-- Toggle Button -->
+                <button id="radio-toggle" class="w-10 h-10 border border-border-subtle flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all duration-300 cursor-pointer bg-transparent">
+                    <span class="material-symbols-outlined text-[20px]">radio</span>
+                </button>
+                
+                <!-- Glassmorphic Dropdown Player -->
+                <div id="custom-radio-widget" class="absolute right-0 top-14 w-80 opacity-0 invisible transition-all duration-300 transform origin-top-right scale-95 z-50 pointer-events-none">
+                    <div class="p-5 border border-border-subtle bg-surface-container-high/90 backdrop-blur-xl shadow-2xl rounded-xl">
                         
-                        <!-- Glassmorphic Dropdown Player (Hidden by default) -->
-                        <div id="spotify-widget" class="absolute right-0 top-14 w-80 opacity-0 invisible transition-all duration-300 transform origin-top-right scale-95 z-50 pointer-events-none">
-                            <div class="p-4 border border-border-subtle bg-surface-container-high/90 backdrop-blur-xl shadow-2xl rounded-xl">
-                                
-                                <!-- Live Indicator -->
-                                <div class="flex items-center gap-3 mb-4">
-                                    <span class="relative flex h-2 w-2">
-                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                                    </span>
-                                    <span class="font-label-mono-sm text-primary uppercase tracking-[0.2em] opacity-80">STATION_LIVE</span>
-                                </div>
-                                
-                                <!-- Spotify Embed -->
-                                <iframe style="border-radius:8px" src="https://open.spotify.com/embed/track/4LRPiXqCikLlN15c3yImP7?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                                
+                        <!-- Header & Visualizer -->
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <span class="relative flex h-2 w-2">
+                                    <span id="radio-ping" class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-0 transition-opacity duration-300"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                                </span>
+                                <span class="font-label-mono-sm text-primary uppercase tracking-[0.2em] opacity-80">COMET_RADIO</span>
+                            </div>
+                            <div class="visualizer-container" id="visualizer">
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
+                                <div class="visualizer-bar"></div>
                             </div>
                         </div>
+                        
+                        <!-- Now Playing -->
+                        <div class="mb-6 text-center">
+                            <div id="now-playing-title" class="font-headline-md text-on-background text-lg truncate mb-1">Select a Station</div>
+                            <div id="now-playing-status" class="font-label-mono-sm text-on-surface-variant opacity-60">Ready to tune in</div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="flex items-center justify-center gap-6 mb-6">
+                            <button id="radio-play-btn" class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer">
+                                <span class="material-symbols-outlined text-[24px]" id="play-icon">play_arrow</span>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="material-symbols-outlined text-on-surface-variant text-[16px]">volume_down</span>
+                            <input type="range" id="radio-volume" min="0" max="1" step="0.01" value="0.5" class="volume-slider cursor-pointer">
+                            <span class="material-symbols-outlined text-on-surface-variant text-[16px]">volume_up</span>
+                        </div>
+
+                        <!-- Station Selector -->
+                        <div class="border-t border-white/10 pt-4">
+                            <div class="font-label-mono-sm text-on-surface-variant opacity-50 uppercase tracking-widest mb-3">Curated Frequencies</div>
+                            <div class="space-y-2 max-h-32 overflow-y-auto pr-2" id="station-list">
+                                <!-- Stations injected via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Custom URL Input -->
+                        <div class="border-t border-white/10 pt-4 mt-4">
+                            <div class="font-label-mono-sm text-on-surface-variant opacity-50 uppercase tracking-widest mb-3">Custom Stream</div>
+                            <div class="flex gap-2">
+                                <input type="text" id="custom-stream-url" placeholder="Paste MP3/Stream URL" class="w-full bg-surface-container-low border border-white/10 text-on-surface font-label-mono-sm px-3 py-2 rounded outline-none focus:border-primary transition-colors cursor-pointer">
+                                <button id="load-custom-stream" class="bg-primary/20 text-primary px-3 py-2 rounded font-label-mono-sm hover:bg-primary hover:text-on-primary-container transition-colors cursor-pointer">Play</button>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
-            
-            <div class="md:hidden">
+        <div class="md:hidden">
                 <span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
             </div>
         </div>
@@ -522,18 +613,11 @@
         });
 
         function applyCursorHoverEffects() {
-            const interactiveElements = document.querySelectorAll('a, button, input, textarea, .cursor-pointer');
+            // Only select elements that haven't had the cursor logic applied yet
+            const interactiveElements = document.querySelectorAll('a:not(.cursor-applied), button:not(.cursor-applied), input:not(.cursor-applied), textarea:not(.cursor-applied), .cursor-pointer:not(.cursor-applied)');
             
-            // Clean up existing listeners to avoid duplicates when re-calling
             interactiveElements.forEach(el => {
-                const newEl = el.cloneNode(true);
-                if (el.parentNode) {
-                   el.parentNode.replaceChild(newEl, el);
-                }
-            });
-            
-            // Re-select and apply
-            document.querySelectorAll('a, button, input, textarea, .cursor-pointer').forEach(el => {
+                el.classList.add('cursor-applied'); // Mark as applied
                 el.addEventListener('mouseenter', () => {
                     cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
                     cursor.style.opacity = '0.3';
@@ -548,8 +632,9 @@
                 });
             });
 
-            // Smooth scroll links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // Smooth scroll links - only apply to un-applied anchor links
+            document.querySelectorAll('a[href^="#"]:not(.scroll-applied)').forEach(anchor => {
+                anchor.classList.add('scroll-applied');
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
                     if (href !== '#') {
@@ -702,26 +787,136 @@
             }
         });
 
-        // --- Radio Station Toggle Logic ---
+        // --- Custom Radio Station Logic ---
         const radioToggle = document.getElementById('radio-toggle');
-        const spotifyWidget = document.getElementById('spotify-widget');
+        const customRadioWidget = document.getElementById('custom-radio-widget');
+        
+        // Audio Elements
+        const audioPlayer = new Audio();
+        audioPlayer.volume = 0.5; // Default volume
+        
+        // UI Elements
+        const playBtn = document.getElementById('radio-play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const volumeSlider = document.getElementById('radio-volume');
+        const titleDisplay = document.getElementById('now-playing-title');
+        const statusDisplay = document.getElementById('now-playing-status');
+        const visualizerBars = document.querySelectorAll('.visualizer-bar');
+        const radioPing = document.getElementById('radio-ping');
+        const stationListContainer = document.getElementById('station-list');
+        const customInput = document.getElementById('custom-stream-url');
+        const customPlayBtn = document.getElementById('load-custom-stream');
 
+        // High-Quality, Ad-Free 24/7 Internet Radio Streams (SomaFM & Zeno)
+        const curatedStations = [
+            { name: "Groove Salad (Ambient/Chill)", url: "https://ice1.somafm.com/groovesalad-128-mp3" },
+            { name: "Space Station (Synth/Space)", url: "https://ice1.somafm.com/spacestation-128-mp3" },
+            { name: "Def Con Radio (Hacking/Beats)", url: "https://ice1.somafm.com/defcon-128-mp3" },
+            { name: "Secret Agent (Lounge/Spy)", url: "https://ice1.somafm.com/secretagent-128-mp3" }
+        ];
+
+        let isPlaying = false;
+        let currentStationName = "No Station Selected";
+
+        // Build Curated Station List UI
+        curatedStations.forEach(station => {
+            const btn = document.createElement('button');
+            btn.className = "w-full text-left px-3 py-2 rounded hover:bg-white/5 text-on-surface font-body-md text-sm transition-colors cursor-pointer truncate";
+            btn.innerText = `📻 ${station.name}`;
+            btn.onclick = () => loadAndPlay(station.name, station.url);
+            stationListContainer.appendChild(btn);
+        });
+
+        // Widget Toggle
         radioToggle.addEventListener('click', () => {
-            // Check if the widget is currently hidden
-            if (spotifyWidget.classList.contains('opacity-0')) {
-                // Open the widget
-                spotifyWidget.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
-                spotifyWidget.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+            if (customRadioWidget.classList.contains('opacity-0')) {
+                customRadioWidget.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+                customRadioWidget.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
                 radioToggle.classList.add('text-primary', 'border-primary');
             } else {
-                // Close the widget (music will keep playing!)
-                spotifyWidget.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
-                spotifyWidget.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+                customRadioWidget.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+                customRadioWidget.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
                 radioToggle.classList.remove('text-primary', 'border-primary');
             }
         });
 
-        // Re-apply cursor hover effects for the new toggle button
+        // Core Playback Function
+        function loadAndPlay(name, url) {
+            currentStationName = name;
+            titleDisplay.innerText = name;
+            statusDisplay.innerText = "Buffering stream...";
+            
+            audioPlayer.src = url;
+            audioPlayer.play()
+                .then(() => {
+                    updatePlayState(true);
+                })
+                .catch(error => {
+                    console.error("Playback failed", error);
+                    statusDisplay.innerText = "Error: Cannot play stream";
+                    updatePlayState(false);
+                });
+        }
+
+        // Toggle Play/Pause Button
+        playBtn.addEventListener('click', () => {
+            if (!audioPlayer.src) {
+                // If nothing is loaded, play the first station by default
+                loadAndPlay(curatedStations[0].name, curatedStations[0].url);
+                return;
+            }
+            
+            if (isPlaying) {
+                audioPlayer.pause();
+                updatePlayState(false);
+            } else {
+                statusDisplay.innerText = "Reconnecting...";
+                audioPlayer.play()
+                    .then(() => updatePlayState(true))
+                    .catch(() => statusDisplay.innerText = "Error: Cannot resume");
+            }
+        });
+
+        // Update UI State based on Audio Status
+        function updatePlayState(playing) {
+            isPlaying = playing;
+            if (playing) {
+                playIcon.innerText = "pause";
+                statusDisplay.innerText = "Live Broadcast";
+                radioPing.classList.add('animate-ping', 'opacity-75');
+                visualizerBars.forEach(bar => bar.classList.add('active'));
+            } else {
+                playIcon.innerText = "play_arrow";
+                statusDisplay.innerText = "Paused";
+                radioPing.classList.remove('animate-ping', 'opacity-75');
+                visualizerBars.forEach(bar => bar.classList.remove('active'));
+            }
+        }
+
+        // Volume Control
+        volumeSlider.addEventListener('input', (e) => {
+            audioPlayer.volume = e.target.value;
+        });
+
+        // Handle Custom Stream Input
+        customPlayBtn.addEventListener('click', () => {
+            const url = customInput.value.trim();
+            if (url) {
+                loadAndPlay("Custom Direct Stream", url);
+                customInput.value = ""; // Clear input after loading
+            }
+        });
+
+        // Handle Audio Events to catch buffering/disconnects automatically
+        audioPlayer.addEventListener('playing', () => updatePlayState(true));
+        audioPlayer.addEventListener('pause', () => updatePlayState(false));
+        audioPlayer.addEventListener('waiting', () => statusDisplay.innerText = "Buffering...");
+        audioPlayer.addEventListener('error', () => {
+            statusDisplay.innerText = "Stream offline or invalid format";
+            updatePlayState(false);
+        });
+
+        // Re-apply cursor hover effects for the new toggle button and UI
         applyCursorHoverEffects();
 
         const contactForm = document.getElementById('contact-form');
